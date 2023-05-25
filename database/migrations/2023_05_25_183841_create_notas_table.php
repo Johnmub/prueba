@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('notas', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('alumno_id',false,true);
-            $table->string('nota_materia', 50)->unique();
+            $table->string('nota_materia', 50);
             $table->double('nota_puntos', 4, 2, true);
             $table->timestamps();
         });
