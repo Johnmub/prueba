@@ -50,12 +50,14 @@ class NotasController extends Controller
     }
 
     // Actualizar nota en especifica de un alumno
-    public function update(Request $request, string $id_alumno, string $id_nota)
+    public function update(Request $request, string $id_nota)
     {
         $request->validate([
-            'nota_materia' => 'required',
-            'nota_puntos' => 'required',
+            'alumno_id' => 'required',
+            'nota_puntos' => 'required'
         ]);
+
+        $id_alumno = $request->query('alumno_id');
 
         $nota = DB::table('notas')->where('alumno_id', '=', $id_alumno)->where('id', '=', $id_nota)->update($request->all());
 
@@ -74,7 +76,7 @@ class NotasController extends Controller
         return [
             "status" => true,
             "data" => $nota,
-            "msg" => "Notas eliminadas con exito"
+            "msg" => "Nota eliminadas con exito"
         ];
     }
 }

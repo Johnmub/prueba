@@ -1,0 +1,62 @@
+Localhost: http://127.0.0.1:8000 | En su defecto el puerto en el que corra la App
+
+******************
+Links para alumnos
+******************
+
+* Metodo (GET) Todos:
+http://127.0.0.1:8000/api/alumnos/
+
+* Metodo (GET) Un alumno:
+http://127.0.0.1:8000/api/alumnos/{id}
+
+* Metodo (POST) Crear:
+http://127.0.0.1:8000/api/alumnos/
+
+- Parametros
+alumno_nombre:
+alumno_apellido:
+alumno_dni:
+alumno_nivel:
+alumno_nacimiento:
+
+* Metodo (PUT o PATCH) Actualizar:
+http://127.0.0.1:8000/api/alumnos/{id}
+
+- Parametros (descomentar codigo para exigir todos los campos)
+alumno_nombre:
+alumno_apellido:
+alumno_dni:
+alumno_nivel:
+alumno_nacimiento:
+
+* Metodo (DELETE) Eliminar a un alumno:
+http://127.0.0.1:8000/api/alumnos/{id}
+
+******************
+Link para notas
+******************
+
+* Metodo (GET) Todas:
+http://127.0.0.1:8000/api/notas/
+
+* Metodo (GET) Un alumno y sus notas:
+http://127.0.0.1:8000/api/notas/{id_alumno}
+
+* Metodo (POST) Crear:
+http://127.0.0.1:8000/api/notas/
+
+- Parametros
+alumno_id:
+nota_materia:
+nota_puntos:
+
+* Metodo (PUT o PATCH) Actualizar:
+http://127.0.0.1:8000/api/notas/{id_nota}
+
+- Parametros
+alumno_id:
+nota_puntos:
+
+* Metodo (DELETE) Eliminar auna nota
+http://127.0.0.1:8000/api/notas/{id}
