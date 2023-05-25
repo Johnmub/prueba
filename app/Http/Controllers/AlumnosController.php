@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alumno;
-use App\Models\Nota;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AlumnosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Retornar alumnos y notas
     public function index()
     {
         $alumnos = DB::table('alumnos')->leftJoin('notas', 'alumnos.id', '=', 'notas.alumno_id')->get();
@@ -22,9 +19,7 @@ class AlumnosController extends Controller
         ];
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Almacenar nuevo alumno
     public function store(Request $request)
     {
         $request->validate([
@@ -42,9 +37,7 @@ class AlumnosController extends Controller
         ];
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Retornar un alumno en especifico con sus notas
     public function show(string $id)
     {
         $alumno = DB::table('alumnos')->leftJoin('notas', 'alumnos.id', '=', 'notas.alumno_id')->where('alumnos.id', '=', $id)->get();
@@ -55,20 +48,19 @@ class AlumnosController extends Controller
         ];
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Actualizar un alumno en especifico
     public function update(Request $request, Alumno $alumno)
     {
-        $request->validate([
-            'alumno_nombre' => 'required',
-            'alumno_apellido' => 'required',
-            'alumno_nivel' => 'required',
-            'alumno_nacimiento' => 'required'
-        ]);
- 
+        // Descomentar para exigir todos los campos de nuevo
+        // $request->validate([
+        //     'alumno_nombre' => 'required',
+        //     'alumno_apellido' => 'required',
+        //     'alumno_nivel' => 'required',
+        //     'alumno_nacimiento' => 'required'
+        // ]);
+
         $alumno->update($request->all());
- 
+
         return [
             "status" => true,
             "data" => $alumno,
@@ -76,17 +68,16 @@ class AlumnosController extends Controller
         ];
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Remover un alumno en especifico y sus notas
     public function destroy(Alumno $alumno)
     {
         $alumno->delete();
+        $notas = DB::table('notas')->where('alumno_id', '=', $alumno['id'])->delete();
 
         return [
             "status" => true,
-            "data" => $alumno,
-            "msg" => "Alumno eliminado con exito"
+            "data" => ['alumno' => $alumno, 'notas' => $notas],
+            "msg" => "Alumno y notas eliminado con exito"
         ];
     }
 }

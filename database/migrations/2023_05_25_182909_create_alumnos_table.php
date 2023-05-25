@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('alumno_nombre', 50);
             $table->string('alumno_apellido', 50);
-            $table->string('alumno_dni', 9)->nullable()->unique();
+            $table->string('alumno_dni', 10)->nullable()->unique();
             $table->mediumInteger('alumno_nivel', false, true);
             $table->dateTime('alumno_nacimiento');
             $table->timestamps();
